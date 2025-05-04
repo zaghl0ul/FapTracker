@@ -1,22 +1,22 @@
 # Time Comparisons Feature Implementation Guide
 
-This document provides an overview of the new Time Comparisons feature, which adds fun and interesting comparisons of your tracked time to various real-world activities and phenomena.
+This document provides an overview of the Time Comparisons feature, which adds fun and interesting comparisons of your tracked time to various real-world activities and phenomena.
 
 ## Feature Overview
 
 The Time Comparisons feature:
-- Compares total tracked time to interesting real-world activities (like "% of the Parthenon built" or listens of "Dopesmoker" by Sleep)
+- Displays 3 random comparisons at a time, selected on app startup
+- Regenerates random comparisons when the refresh button is tapped
 - Allows you to pin favorite comparisons so they remain visible
-- Regenerates new comparisons to keep the experience fresh
-- Displays comparisons in an engaging, card-based UI
+- Shows your total tracked time compared to interesting real-world activities
 
 ## Implementation Files
 
 1. **ComparisonContext.tsx**: 
    - Manages comparison data state
    - Provides pin/unpin functionality
-   - Handles comparison calculations
-   - Persists user preferences
+   - Randomly selects 3 comparisons to display
+   - Persists pinned comparisons between sessions
 
 2. **TimeComparisons.tsx**:
    - UI component that renders comparison cards
@@ -44,20 +44,22 @@ The Time Comparisons feature:
    - Space (astronomical events, missions)
    - Technology (processes, operations)
 
-2. **Calculation Logic**:
+2. **Display Logic**:
+   - 3 random comparisons are selected on app startup
+   - Pinned comparisons are prioritized in the display
+   - When you pin a comparison, it will always be displayed
+   - Unpinned comparisons are randomly rotated each time you refresh
+
+3. **Calculation Logic**:
    - Each comparison has a defined time value in minutes
    - Your total tracked time is divided by each comparison's time value
    - Results show how many times you could have completed each activity
 
-3. **Pinning System**:
-   - You can pin up to 5 favorite comparisons
-   - Pinned comparisons are displayed at the top of the list
-   - Pins are persisted between app sessions
-
-4. **Regeneration Feature**:
-   - Press the refresh icon to get new comparison ideas
-   - The system maintains a diverse mix of comparison categories
-   - Pinned comparisons are preserved during regeneration
+4. **Pinning System**:
+   - You can pin favorite comparisons by tapping the bookmark icon
+   - Pinned comparisons are preserved between app sessions
+   - You can unpin a comparison by tapping the bookmark icon again
+   - You can pin up to 5 comparisons at a time
 
 ## Using the Feature
 
@@ -66,21 +68,23 @@ The Time Comparisons feature:
    - Scroll down to see the Time Comparisons section
    - Your total tracked time will be compared to various activities
 
-2. **Pinning Comparisons**:
-   - Tap the bookmark icon on any comparison to pin it
-   - Pinned comparisons will always appear at the top
-   - You can pin up to 5 comparisons
-
-3. **Refreshing Comparisons**:
+2. **Refreshing Comparisons**:
    - Tap the refresh icon to generate new random comparisons
    - Your pinned comparisons will remain unchanged
+   - Each app startup will display a fresh set of comparisons
+
+3. **Pinning Comparisons**:
+   - Tap the bookmark icon on any comparison to pin it
+   - Pinned comparisons will always be displayed
+   - You can pin up to 5 comparisons
+   - Unpin by tapping the bookmark icon again
 
 ## Technical Details
 
 - Uses AsyncStorage for persistence with the key `habitTracker.comparisons`
 - Integrates with the existing theme system for consistent styling
-- Performs daily regeneration to keep content fresh
-- Organized by category for variety
+- Performs random selection on app startup
+- Organizes comparisons by category for variety
 
 ## Customization
 

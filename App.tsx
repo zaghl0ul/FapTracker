@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import { registerRootComponent } from 'expo';
 import { SettingsProvider } from './src/contexts/SettingsContext';
 import { EntriesProvider } from './src/contexts/EntriesContext';
+import { ComparisonProvider } from './src/contexts/ComparisonContext';
 import { AppNavigator } from './src/navigation/AppNavigator';
 import * as Notifications from 'expo-notifications';
 
@@ -32,10 +33,12 @@ function App() {
     <SafeAreaProvider>
       <SettingsProvider>
         <EntriesProvider>
-          <NavigationContainer>
-            <StatusBar style="auto" />
-            <AppNavigator />
-          </NavigationContainer>
+          <ComparisonProvider>
+            <NavigationContainer>
+              <StatusBar style="auto" />
+              <AppNavigator />
+            </NavigationContainer>
+          </ComparisonProvider>
         </EntriesProvider>
       </SettingsProvider>
     </SafeAreaProvider>

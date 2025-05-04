@@ -19,6 +19,7 @@ import { format, subDays, parseISO, eachDayOfInterval } from 'date-fns';
 import { useTheme } from '../hooks/useTheme';
 import { useEntries } from '../contexts/EntriesContext';
 import { useStats } from '../hooks/useStats';
+import TimeComparisons from '../components/TimeComparisons';
 
 // Get screen dimensions for responsive charts
 const screenWidth = Dimensions.get('window').width;
@@ -397,6 +398,11 @@ const StatsScreen: React.FC = () => {
           </View>
         </View>
       </View>
+      
+      {/* Time Comparisons Section */}
+      <View style={[styles.timeComparisonCard, { backgroundColor: dark ? 'rgba(31, 41, 55, 0.7)' : 'rgba(243, 244, 246, 0.7)' }]}>
+        <TimeComparisons totalMinutes={stats.totalDuration} />
+      </View>
     </ScrollView>
   );
 };
@@ -473,7 +479,7 @@ const styles = StyleSheet.create({
     fontStyle: 'italic',
   },
   comparisonSection: {
-    marginBottom: 40,
+    marginBottom: 24,
   },
   comparisonGrid: {
     flexDirection: 'row',
@@ -506,6 +512,11 @@ const styles = StyleSheet.create({
   percentChange: {
     fontSize: 12,
     marginTop: 2,
+  },
+  timeComparisonCard: {
+    borderRadius: 12,
+    padding: 16,
+    marginBottom: 40,
   },
 });
 

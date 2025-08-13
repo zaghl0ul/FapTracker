@@ -1,0 +1,5 @@
+{
+  "name": "FapTracker™",
+  "description": "A satirical but functional web app that lets users log their 'self-love' sessions and then calculates cumulative time spent, comparing it to historically significant or humorous events.",
+  "requestFramePermissions": []
+}
